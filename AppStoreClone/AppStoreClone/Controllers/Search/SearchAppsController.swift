@@ -8,7 +8,7 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class SearchAppsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class SearchAppsController: BaseListController, UICollectionViewDelegateFlowLayout {
     
     private let searchController = UISearchController(searchResultsController: nil)
     
@@ -19,14 +19,6 @@ class SearchAppsController: UICollectionViewController, UICollectionViewDelegate
         collectionView.backgroundColor = .white
         self.collectionView!.register(SearchResultCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         configureSearchBar()
-    }
-
-    init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func beginSearch(with searchText: String) {

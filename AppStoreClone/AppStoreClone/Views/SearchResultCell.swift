@@ -44,7 +44,7 @@ class SearchResultCell: UICollectionViewCell {
         btn.titleLabel?.font = .boldSystemFont(ofSize: 14)
         btn.backgroundColor = UIColor(white: 0.9, alpha: 0.7)
         btn.layer.cornerRadius = 16
-        btn.setWidth(width: 80)
+        btn.setDimensions(height: 32, width: 80)
         return btn
     }()
     
