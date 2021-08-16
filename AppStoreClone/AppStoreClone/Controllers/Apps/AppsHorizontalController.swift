@@ -10,21 +10,22 @@ private let reuseIdentifier = "cell"
 
 class AppsHorizontalController: BaseListController, UICollectionViewDelegateFlowLayout {
     
+    //  MARK: -  Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
     }
     
+    //  MARK: -  Helpers
     func configureCollectionView() {
         collectionView.backgroundColor = .white
         collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
         }
-        
-        
     }
     
+    //  MARK: -  UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
@@ -33,6 +34,7 @@ class AppsHorizontalController: BaseListController, UICollectionViewDelegateFlow
         return cell
     }
     
+    //  MARK: -  UICollectionViewDelegateFlowLayout
     let topBottomSpacing: CGFloat = 12
     let lineSpacing: CGFloat = 10
     

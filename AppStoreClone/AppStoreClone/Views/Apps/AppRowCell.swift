@@ -20,8 +20,8 @@ class AppRowCell: UICollectionViewCell {
         return iv
     }()
     
-    private let appNameLabel = CustomLabel(text: "The Witness", font: .boldSystemFont(ofSize: 16))
-    private let companyNameLabel = CustomLabel(text: "Company name", font: .systemFont(ofSize: 13))
+    private let appNameLabel = CustomLabel(text: "The Witness", font: .boldSystemFont(ofSize: 18))
+    private let companyNameLabel = CustomLabel(text: "Company name", font: .systemFont(ofSize: 14))
     
     private let getButton: UIButton = {
         let btn = UIButton(type: .system)
@@ -50,5 +50,12 @@ class AppRowCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(with model: AppDetail) {
+        appNameLabel.text = model.results![0].name
+        companyNameLabel.text = model.results![0].genres[0].name
+        guard let imageUrl = URL(string: model.results![0].artworkUrl100!) else { return }
+        appIconImage.sd_setImage(with: imageUrl)
     }
 }

@@ -12,7 +12,7 @@ class SearchAppsController: BaseListController, UICollectionViewDelegateFlowLayo
     
     private let searchController = UISearchController(searchResultsController: nil)
     
-    let viewModel = AppSearchViewModel()
+    let viewModel = SearchViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,6 +7,26 @@
 
 import UIKit
 
+extension UIButton {
+    convenience init(type: ButtonType = .system, titleLabel: String, font: UIFont) {
+        self.init(frame: .zero)
+        setTitle("GET", for: .normal)
+        backgroundColor = .systemGray6
+        setTitleColor(.blue, for: .normal)
+        self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        layer.cornerRadius = 16
+    }
+}
+
+extension UIImageView {
+    convenience init(cornerRadius: CGFloat) {
+        self.init(frame: .zero)
+        clipsToBounds = true
+        backgroundColor = .systemGray6
+        layer.cornerRadius = cornerRadius
+    }
+}
+
 extension UIView {
     func anchor( top: NSLayoutYAxisAnchor? = nil,
                  left: NSLayoutXAxisAnchor? = nil,
@@ -76,3 +96,4 @@ extension UIView {
         widthAnchor.constraint(equalToConstant: width).isActive = true
     }
 }
+

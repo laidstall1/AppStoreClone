@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AppSearchViewModel {
+class SearchViewModel {
 
     var appResult = [SearchResult]()
     
