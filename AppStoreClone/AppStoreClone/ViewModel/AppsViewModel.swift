@@ -9,23 +9,42 @@ import Foundation
 
 class AppsViewModel {
     
-    var appsData = [AppDetail]()
+    var appsData: AppsModel?
+    var appGroup = [AppsModel]()
     
-    func fetchGames(completion: @escaping () -> Void) {
-        guard let urlString = URL(string: "https://rss.itunes.apple.com/api/v1/us/ios-apps/top-free/all/50/explicit.json") else { return }
-        URLSession.shared.dataTask(with: urlString) { data, response, error in
+    func fetchTopFreeApps(completion: @escaping () -> Void) {
+        AppService.shared.fetchFeed(endPoint: "top-free") { data, response, error in
             if let error = error {
                 print(error.localizedDescription)
             }
             do {
                 if let data = data {
-                    let json = try JSONDecoder().decode(AppsModel.self, from: data)
-                    self.appsData.append(json.feed!)
-                    completion()
-                }
+                let json = try JSONDecoder().decode(AppsModel.self, from: data)
+                self.appsData = json
+                self.appGroup.append(json)
+                completion()
+              }
             } catch {
                 print(error.localizedDescription)
             }
-        }.resume()
+        }
+    }
+    
+    func fetchNewGames(completion: @escaping () -> Void) {
+        AppService.shared.fetchFeed(endPoint: "new-games-we-love") { data, response, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            do {
+                if let data = data {
+                let json = try JSONDecoder().decode(AppsModel.self, from: data)
+//                self.appsData = json
+                self.appGroup.append(json)
+                completion()
+              }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }

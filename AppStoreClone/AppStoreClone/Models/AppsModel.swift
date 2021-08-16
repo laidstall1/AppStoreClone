@@ -9,17 +9,17 @@ import Foundation
 
 // MARK: - AppsModel
 struct AppsModel: Codable {
-    let feed: AppDetail?
+    let feed: AppGroup
 }
 
 // MARK: - Feed
-struct AppDetail: Codable {
+struct AppGroup: Codable {
     let title: String?
     let id: String?
     let copyright, country: String?
     let icon: String?
     let updated: String?
-    let results: [FeedResult]?
+    let results: [FeedResult]
 }
 
 // MARK: - Result

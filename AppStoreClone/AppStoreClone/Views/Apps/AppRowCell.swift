@@ -52,10 +52,11 @@ class AppRowCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with model: AppDetail) {
-        appNameLabel.text = model.results![0].name
-        companyNameLabel.text = model.results![0].genres[0].name
-        guard let imageUrl = URL(string: model.results![0].artworkUrl100!) else { return }
+    func configure(with model: AppsModel, index: Int) {
+        let result = model.feed.results[index]
+        appNameLabel.text = result.name
+        companyNameLabel.text = result.artistName
+        guard let imageUrl = URL(string: result.artworkUrl100!) else { return }
         appIconImage.sd_setImage(with: imageUrl)
     }
 }

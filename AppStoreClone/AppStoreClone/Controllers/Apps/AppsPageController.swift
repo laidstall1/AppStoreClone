@@ -11,12 +11,24 @@ private let reuseIdentifier = "cell"
 private let headerReuseIdentifier = "headercell"
 
 class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout {
-
+    //  MARK: -  Properties
+    private let viewModel = AppsViewModel()
     
+    //  MARK: -  Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         configureCollectionView()
+        viewModelListener()
+    }
+    
+    //  MARK: -  Helpers
+    func viewModelListener() {
+        viewModel.fetchTopFreeApps {
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
     }
     
     func configureCollectionView() {
@@ -24,6 +36,7 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
         collectionView.register(AppsHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         collectionView.delegate = self
     }
+    
     // MARK:- UICollectionViewDataSource
 
     // MARK: CollectionViewHeader
@@ -36,16 +49,16 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return viewModel.appGroup.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AppsGroupCell
+        cell.titleLabel.text = viewModel.appsData?.feed.title
         return cell
     }
 
     // MARK:- UICollectionViewDelegateFlowLayout
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width, height: 300)
     }

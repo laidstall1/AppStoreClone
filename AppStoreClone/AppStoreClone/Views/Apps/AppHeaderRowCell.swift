@@ -44,7 +44,7 @@ class AppHeaderRowCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with model: AppDetail) {
+    func configure(with model: AppGroup) {
 //        appNameButton.setTitle(model.results![0].name, for: .normal)
 //        descriptionLabel.text = model.results![0].genres[0].name
 //        guard let imageUrl = URL(string: model.results![0].artworkUrl100!) else { return }
